@@ -21,7 +21,7 @@ def load_doc(filename):
  
 # load
 input_path = "C:\\Users\\iD Student\\Documents\\PPNN\\Processed Data\\"
-in_filename = 'elon_sequences_WL1.txt'
+in_filename = 'elon_full_no_rt.txt'
 raw_text = load_doc(input_path+in_filename)
 lines = raw_text.split('\n')
 
@@ -54,9 +54,10 @@ print('Vocabulary Size: %d' % vocab_size)
 #%%
 sequences = array(sequences)
 print(sequences)
-X, y = sequences[:,:-3], sequences[:,-3]
+X, y = sequences[:,:1], sequences[:,1]
 
 #%%
+print(X)
 sequences = [to_categorical(x, num_classes=vocab_size) for x in X]
 X = array(sequences)
 y = to_categorical(y, num_classes=vocab_size)
@@ -73,14 +74,40 @@ print(model.summary())
 # compile model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 # fit model
-model.fit(X, y, epochs=100, verbose=2)
+model.fit(X, y, epochs=20, verbose=2)
+
+
+#%%
+# second round of training
+in_filename = 'elon_april_to_may.txt'
+raw_text = load_doc(input_path+in_filename)
+lines = raw_text.split('\n')
+
+sequences = list()
+for line in lines:
+	# integer encode line
+	encoded_seq = [mapping[word] for word in line.split()]
+	# store
+	sequences.append(encoded_seq)
+print(sequences)
+
+sequences = array(sequences)
+X, y = sequences[:,:1], sequences[:,1]
+
+sequences = [to_categorical(x, num_classes=vocab_size) for x in X]
+X = array(sequences)
+y = to_categorical(y, num_classes=vocab_size)
+
+#%%
+# fit model
+model.fit(X, y, epochs=5, verbose=2)
+
 
 #%%
 # save the model to file
-model.save(input_path+'model_WL1.h5')
+model.save(input_path+'2_stage_proto_model.h5')
 # save the mapping
-dump(mapping, open(input_path+'mapping_WL1.pkl', 'wb'))
+dump(mapping, open(input_path+'2_stage_proto_mapping.pkl', 'wb'))
 
-#%%
-print("aaa")
+
 #%%
