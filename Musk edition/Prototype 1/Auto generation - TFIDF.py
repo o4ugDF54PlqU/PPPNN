@@ -35,26 +35,20 @@ def generate_seq(model, mapping, seq_length, seed_text, n_chars):
 		# append to input
 		in_text = in_text+ " " + out
 	return in_text
+ 
 
 
 
 #%%
 # Loading NLTK
-from gensim.test.utils import common_texts, get_tmpfile
-from gensim.models import Word2Vec
 import csv
 import nltk
 from nltk.corpus import wordnet as wn
-nltk.download('stopwords')
-nouns = {x.name().split('.', 1)[0] for x in wn.all_synsets('n')}
-path = get_tmpfile("word2vec.model")
-modelw2v = Word2Vec(min_count=1, workers=6)
-modelw2v.save("word2vec.model")
 from nltk.corpus import stopwords
 stops_words = set(stopwords.words('english'))
 
-usage_dict = {}
 sentences = []
+used_words = []
 with open('C:\\Users\\iD Student\\Documents\\PPNN\\Raw data\\elonmusk_tweets.csv') as csv_file:
 	csv_reader = csv.reader(csv_file, delimiter=',')
 	line_count = 0
@@ -72,42 +66,74 @@ with open('C:\\Users\\iD Student\\Documents\\PPNN\\Raw data\\elonmusk_tweets.csv
 					temp.remove(word)
 				elif '@' in word:
 					temp.remove(word)
-			sentences.append(" ".join(temp))
 			for word in temp:
-				if word not in usage_dict:
-					usage_dict[word] = 1
-				else:
-					usage_dict[word] += 1
+				if word not in used_words:
+					used_words.append(word)
+			sentences.append(temp)
 			line_count+=1
 	print(f'Processed {line_count} lines.')
 
-nouns_in_tweet = []
-for item in usage_dict:
-	if item in nouns and item not in stops_words:
-		nouns_in_tweet.append(item)
+#%%
+new_sentences = []
+count = 0
+temp = []
+for tweet in sentences:
+	for word in tweet:
+		temp.append(word)
+	count += 1
+	if count % 25 == 0 or count == len(sentences):
+		new_sentences.append(temp)
+		temp = []
+sentences = new_sentences[:]
 
+#%%
+# Calculates TF
+dicts = []
+for tweet in sentences:
+	tweet_dict = {}
+	count = 0
+	for word in tweet:
+		count += 1
+		try:
+			tweet_dict[word] += 1
+		except KeyError:
+			tweet_dict[word] = 1
+	for word in tweet_dict:
+		tweet_dict[word] /= count
+	dicts.append(tweet_dict)
 
 
 #%%
-split_sent = []
-for sentence in sentences:
-	split_sent.append(sentence.split())
-
-modelw2v.build_vocab(split_sent)
-modelw2v.train(split_sent, total_examples=len(sentences), epochs=100)
+# Calculate IDF
+import math
+IDF = {}
+for used_word in used_words:
+	IDF[used_word] = 0
+	for tweet in sentences:
+		for word in tweet:
+			if used_word == word:
+				IDF[used_word] += 1
+				break
+	IDF[used_word] = math.log10(len(sentences)/IDF[used_word])
 
 #%%
-scores = dict()
-for noun in nouns_in_tweet:
+# calculates TFIDF
+TFIDF = {}
+word_count = {}
+for word in dicts[3]:
+	if word not in TFIDF:
+		TFIDF[word] = dicts[3][word] * IDF[word]
+		word_count[word] = 1
+	else:
+		TFIDF[word] += dicts[3][word] * IDF[word]
+		word_count[word] += 1
 
-	scores[noun] = usage_dict[noun]
-	relations = modelw2v.most_similar(positive=[noun], topn = 10)
-	for rel in relations:
-		scores[noun] += usage_dict[rel[0]] * rel[1]
+#%%
+TFIDF
 
 #%%
 count = 0
-sorted_list = sorted(scores, key = scores.__getitem__)
+sorted_list = sorted(TFIDF, key = TFIDF.__getitem__)
 for word in sorted_list[::-1]:
 	final_pass = []
 	count2 = 0
@@ -119,7 +145,8 @@ for word in sorted_list[::-1]:
 		if count2 == 3:
 			break
 	final_pass = "".join(final_pass)
-	print(final_pass)
-	count+=1
+	print(final_pass)	count+=1
 	if count == 10:
 		break
+
+#%%
