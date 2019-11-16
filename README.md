@@ -1,7 +1,7 @@
 # PPNN
 Password Prediction Neural Network Proof of Concept
 
-Included are multiple RNNs made to train and identify a person's style of writing and thoughts based off of their tweets. Early versions are merely LSTM text generators and the more current ones try to generate something that is closer to a password.
+Included are multiple RNNs made to train and identify a person's style of writing and thoughts based off of their tweets. Early versions are merely LSTM text generators and the later ones try to generate something that is closer to a password.
 
 Why is this a thing?
 
