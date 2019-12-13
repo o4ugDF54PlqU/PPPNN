@@ -3,6 +3,10 @@
 
 Included are multiple RNNs made to train and identify a person's style of writing and thoughts based off of their tweets. Early versions are merely LSTM text generators and the later ones try to generate something that is closer to a password by incorporating TF-IDF, Gensim and NLTK.
 
+[Version 0.0 - you should just skip this one](Prototype -1/)
+[Version 0.4 - basically a LSTM generator network](Prototype 0/)
+[Version 0.9 - incorporates TF-IDF, Gensim and NLTK](Prototype 1/)
+
 ## Why is this a thing?
 
 I believe that with enough data, a person's conscious mind can be modeled and closely replicated. This project is also meant to make users more aware and careful with the amount of private information that they post online while companies needs to be more careful about how their user's data is handled.
