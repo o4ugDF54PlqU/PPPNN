@@ -3,11 +3,11 @@
 
 Included are multiple RNNs made to train and identify a person's style of writing and thoughts based off of their tweets. Early versions are merely LSTM text generators and the later ones try to generate something that is closer to a password by incorporating TF-IDF, Gensim and NLTK.
 
-[Version 0.0 - you should just skip this one](Prototype -1/README.md)
+[Version 0.0 - you should just skip this one](https://github.com/o4ugDF54PlqU/PPPNN/tree/master/Prototype%20-1)
 
-[Version 0.4 - basically a LSTM generator network](Prototype 0/README.md)
+[Version 0.4 - basically a LSTM generator network](https://github.com/o4ugDF54PlqU/PPPNN/tree/master/Prototype%200)
 
-[Version 0.9 - incorporates TF-IDF, Gensim and NLTK](Prototype 1/README.md)
+[Version 0.9 - incorporates TF-IDF, Gensim and NLTK](https://github.com/o4ugDF54PlqU/PPPNN/tree/master/Prototype%201)
 
 ## Why is this a thing?
 
