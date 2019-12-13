@@ -1,16 +1,11 @@
-# PPPNN
-Personalized Password Prediction Neural Network Proof of Concept
+# Prototype 1
+*Note: to run any of these, you will have to modify the variable input_path and output_path in all the files* 
+You should read the readme.md in prototype 0 before this as this builds upon it
 
-Included are multiple RNNs made to train and identify a person's style of writing and thoughts based off of their tweets. Early versions are merely LSTM text generators and the later ones try to generate something that is closer to a password by incorporating TF-IDF, Gensim and NLTK.
+**Date filter basic and preprocessing.py:** 
 
-Why is this a thing?
+**Multi Training.py:** This script defines the model and trains it. Currently it defines a LSTM layer of size 75 and a dense layer of the size of the vocabulary of characters (around 70). It then saves the model as model0_strict.h5 and the mapping (to decode the output) as mapping0_strict.pkl.
 
-I believe that with enough data, a person's conscious mind can be modeled and closely replicated. This project is also meant to make users more aware and careful with the amount of private information that they post online while companies needs to be more careful about how their user's data is handled.
+**Auto generation.py:** Finally, this script takes in the output of Training.py and uses it to generate the text. The script defines a function generate_seq which takes in the model, mapping, size of input (should be the same size as trained, smaller or larger may cause errors), the input (a start for the generator), and the size of output to output an output string. 3 examples included at the end.
 
-This project attempts to prove this concept, by trying to predict a person's password based off of the information on them that is publicly available. Currently, the network only uses Twitter posts as the input data since it is publicly available and there is a large amount of data contained in them. 
-
-However, that is still a small dataset with not a lot of information. A malicious actor could easily create a network and feed it even more data that is not publicly or legally available online, such as a person's previously leaked and cracked passwords, massively increasing the accuracy of the network. 
-
-Such a technique can be considered an evolution over traditional credential stuffing attacks, though the neural network inference will mean an increase in the time and energy cost of each attempt. This will likely limit the neural network method to individual, high value targets such as system administrators, government officials, or celebrities.
-
-Nonetheless, the use of multi-factor security devices and randomly generated password strings (stored in password managers) would thwart any malicious actor using this method, which is why no one important should use a single, legible password to protect their accounts. 
+**Auto generation - TFIDF.py:** Finally, this script takes in the output of Training.py and uses it to generate the text. The script defines a function generate_seq which takes in the model, mapping, size of input (should be the same size as trained, smaller or larger may cause errors), the input (a start for the generator), and the size of output to output an output string. 3 examples included at the end.
