@@ -19,7 +19,7 @@ def load_doc(filename):
 	return text
  
 # load
-input_path = "C:\\Users\\iD Student\\Documents\\PPNN\\Processed Data\\"
+input_path = "D:\\Github\\PPPNN\\Processed Data\\"
 in_filename = 'elon0_sequences_strict.txt'
 raw_text = load_doc(input_path+in_filename)
 lines = raw_text.split('\n')
