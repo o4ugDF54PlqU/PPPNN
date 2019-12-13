@@ -1,16 +1,8 @@
-# PPPNN
-Personalized Password Prediction Neural Network Proof of Concept
+# Prototype 0
+*Note: to run any of these, you will have to modify the variable input_path and output_path* 
+## Char level
+This is the second version of the network. At this point, it is a simple character level generator consisting of a LSTM layer then a dense layer. 
 
-Included are multiple RNNs made to train and identify a person's style of writing and thoughts based off of their tweets. Early versions are merely LSTM text generators and the later ones try to generate something that is closer to a password by incorporating TF-IDF, Gensim and NLTK.
+**preparing data.py:** Run this first, it processes the data in the folder Raw Data and also determines the size of the input for the network later on. The default is 10 characters input and 1 output, 11 total.
 
-Why is this a thing?
-
-I believe that with enough data, a person's conscious mind can be modeled and closely replicated. This project is also meant to make users more aware and careful with the amount of private information that they post online while companies needs to be more careful about how their user's data is handled.
-
-This project attempts to prove this concept, by trying to predict a person's password based off of the information on them that is publicly available. Currently, the network only uses Twitter posts as the input data since it is publicly available and there is a large amount of data contained in them. 
-
-However, that is still a small dataset with not a lot of information. A malicious actor could easily create a network and feed it even more data that is not publicly or legally available online, such as a person's previously leaked and cracked passwords, massively increasing the accuracy of the network. 
-
-Such a technique can be considered an evolution over traditional credential stuffing attacks, though the neural network inference will mean an increase in the time and energy cost of each attempt. This will likely limit the neural network method to individual, high value targets such as system administrators, government officials, or celebrities.
-
-Nonetheless, the use of multi-factor security devices and randomly generated password strings (stored in password managers) would thwart any malicious actor using this method, which is why no one important should use a single, legible password to protect their accounts. 
+**Training.py:** This script defines the model and trains it.
