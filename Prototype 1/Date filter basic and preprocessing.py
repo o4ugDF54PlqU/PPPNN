@@ -22,8 +22,8 @@ def save_doc(lines, filename):
 
 #%%
 # load text
-input_path = "C:\\Users\\iD Student\\Documents\\PPNN\\Raw Data\\"
-output_path = "C:\\Users\\iD Student\\Documents\\PPNN\\Processed Data\\"
+input_path = "D:\\Github\\PPPNN\\Raw Data\\"
+output_path = "D:\\Github\\PPPNN\\Processed Data\\"
 in_filename = 'elonmusk_tweets.csv'
 
 sentences = []

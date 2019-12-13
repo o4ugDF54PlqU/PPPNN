@@ -20,7 +20,7 @@ def load_doc(filename):
 	return text
  
 # load
-input_path = "C:\\Users\\iD Student\\Documents\\PPNN\\Processed Data\\"
+input_path = "D:\\Github\\PPPNN\\Processed Data\\"
 in_filename = 'elon_full_no_rt.txt'
 raw_text = load_doc(input_path+in_filename)
 lines = raw_text.split('\n')
