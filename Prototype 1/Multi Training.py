@@ -78,7 +78,7 @@ model.fit(X, y, epochs=20, verbose=2)
 
 
 #%%
-# second round of training
+# second round of training with filtered data for fine tuning
 in_filename = 'elon_april_to_may.txt'
 raw_text = load_doc(input_path+in_filename)
 lines = raw_text.split('\n')

@@ -81,6 +81,7 @@ with open('C:\\Users\\iD Student\\Documents\\PPNN\\Raw data\\elonmusk_tweets.csv
 			line_count+=1
 	print(f'Processed {line_count} lines.')
 
+#removing stopwords
 nouns_in_tweet = []
 for item in usage_dict:
 	if item in nouns and item not in stops_words:
@@ -89,6 +90,7 @@ for item in usage_dict:
 
 
 #%%
+# Trains the word2vec model
 split_sent = []
 for sentence in sentences:
 	split_sent.append(sentence.split())
@@ -97,6 +99,8 @@ modelw2v.build_vocab(split_sent)
 modelw2v.train(split_sent, total_examples=len(sentences), epochs=100)
 
 #%%
+# Each noun is given a score based on how often a related word is used
+# multiplied by how related (0-1) that word is, for the top 10 most related
 scores = dict()
 for noun in nouns_in_tweet:
 
@@ -106,6 +110,7 @@ for noun in nouns_in_tweet:
 		scores[noun] += usage_dict[rel[0]] * rel[1]
 
 #%%
+# Generates using the top scoring word as the starter
 count = 0
 sorted_list = sorted(scores, key = scores.__getitem__)
 for word in sorted_list[::-1]:

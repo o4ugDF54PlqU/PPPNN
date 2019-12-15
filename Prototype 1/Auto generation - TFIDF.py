@@ -132,6 +132,7 @@ for word in dicts[3]:
 TFIDF
 
 #%%
+# Generates based on TFIDF order
 count = 0
 sorted_list = sorted(TFIDF, key = TFIDF.__getitem__)
 for word in sorted_list[::-1]:
@@ -145,7 +146,8 @@ for word in sorted_list[::-1]:
 		if count2 == 3:
 			break
 	final_pass = "".join(final_pass)
-	print(final_pass)	count+=1
+	print(final_pass)
+	count+=1
 	if count == 10:
 		break
 
