@@ -19,4 +19,4 @@ This required me to create a dictionary counting nouns from the tweet dataset, r
 ## Auto generation - TFIDF.py
 This version tries to avoid brute forcing like the above, but by using TF-IDF rather than my own custom solution. 
 
-I don't remember if I ever got this to work correctly, especially since I just saw a syntax error that wouldn've prevented it from working when I made it. Though it's still possible it works, I wouldn't know since my current machine doesn't have Gensim, NLTK, keras, TensorFlow, etc installed anymore and can't check. Installing TF to use GPU is such a hassle. So if you got it working, let me know and I'll update this.
+I don't remember if I ever got this to work correctly, especially since I just saw a syntax error that would've prevented it from working when I made it. Though it's still possible it works (all the logic seems correct), I wouldn't know since my current machine doesn't have Gensim, NLTK, keras, TensorFlow, etc installed anymore and can't check. Installing TF to use GPU is such a hassle. So if you got it working, let me know and I'll update this.
